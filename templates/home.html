@@ -1,0 +1,145 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+</header> <!-- section-header.// -->
+
+<!-- ========================= SECTION INTRO ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container-fluid">
+
+<div class="card bg-dark text-white">
+{% for cover in covers %}
+  <img class="card-img" src="{{ cover.cover_image.url }}" alt="Card image">
+  <div class="card-img-overlay">
+    <a href="{% url 'store' %}"><h5 class="card-title" style="color:white;">{{ cover.cover_title }}</h5></a>
+    <p class="card-text">{{ cover.cover_description }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION INTRO END// ========================= -->
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content">
+<div class="container-fluid">
+
+<header class="section-heading">
+	<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">Все товары</a>
+	<h3 style='color:#3167eb;' class="section-title">Популярные товары</h3>
+</header><!-- sect-heading -->
+
+	
+<div class="row">
+{% for product in popular_products %}
+	<div class="col-md-2">
+		<div href="#" class="card card-product-grid">
+			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+			<figcaption class="info-wrap">
+				<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+				
+				<div class='rating-star'>
+					<span>
+						<i class='fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}' aria-hidden="true"></i>	
+					</span>
+					
+				</div>
+				<div class="price mt-1">{{ product.price }} сом     &nbsp&nbsp&nbsp<del style = "color:gray;" class="price h6">{{ product.old_price }} сом</del></div> <!-- price-wrap.// -->
+				
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+{% endfor %}
+</div> <!-- row.// -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content">
+<div class="container-fluid">
+
+<header class="section-heading">
+	<h3 style='color:#3167eb;' class="section-title">Новое поступление</h3>
+</header><!-- sect-heading -->
+
+<div class="row">
+{% for product in newarrived_products %}
+	<div class="col-md-2">
+		<div href="#" class="card card-product-grid">
+			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+			<figcaption class="info-wrap">
+				<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+				
+				<div class='rating-star'>
+					<span>
+						<i class='fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}' aria-hidden="true"></i>	
+					</span>
+				</div>
+				<div class="price mt-1">{{ product.price }} сом     &nbsp&nbsp&nbsp<del style = "color:gray;" class="price h6">{{ product.old_price }} сом</del></div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+{% endfor %}
+</div> <!-- row.// -->
+
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-bottom-sm">
+<div class="container-fluid">
+
+<header class="section-heading">
+	<h3 style='color:#3167eb;' class="section-title">Рекомендуемые</h3>
+</header><!-- sect-heading -->
+
+<div class="row">
+{% for product in recommended_products %}
+	<div class="col-md-2">
+		<div href="#" class="card card-product-grid">
+			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+			<figcaption class="info-wrap">
+				<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+				<div class='rating-star'>
+					<span>
+						<i class='fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o{% endif %}' aria-hidden="true"></i>
+						<i class='fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o{% endif %}' aria-hidden="true"></i>	
+						
+					</span>
+				</div>
+				<div class="price mt-1">{{ product.price }} сом     &nbsp&nbsp&nbsp<del style = "color:gray;" class="price h6">{{ product.old_price }} сом</del></div> <!-- price-wrap.// -->					</figcaption>
+		</div>
+	</div> <!-- col.// -->
+{% endfor %}
+</div> <!-- row.// -->
+
+</div> <!-- container .//  -->
+</section>
+
+
+</body>
+</html>
+
+{% endblock content %}
