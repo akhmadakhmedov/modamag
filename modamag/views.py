@@ -10,6 +10,7 @@ def home(request):
     covers                  = Cover.objects.all()
 
     # Get the reviews
+    reviews = None
     for product in products:
         reviews = ReviewRating.objects.filter(product_id = product.id, status=True)
     context = {
