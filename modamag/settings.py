@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
 import os
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool) #True
 
-ALLOWED_HOSTS = ['skido-env.eba-3pxyppjj.eu-central-1.elasticbeanstalk.com', '*']
+ALLOWED_HOSTS = ['skido-env.eba-gzwphc7m.eu-central-1.elasticbeanstalk.com']
 
 
 # Application definition
